@@ -4,17 +4,50 @@ const backgroundContainer = document.getElementById('background-elements');
 const STRINGS = {
     default: {
         title: "Let's Celebrate!",
-        subtitle: "Every moment is worth a party.",
+        subtitles: [
+            "Every moment is worth a party.",
+            "Create a personalized greeting card.",
+            "Spread the joy with a custom message.",
+            "Celebrate life's special moments.",
+            "Make someone's day unforgettable.",
+            "Design a wish in seconds.",
+            "Your celebration starts here.",
+            "Send love with a digital card.",
+            "Crafting smiles, one link at a time.",
+            "The perfect way to say you care."
+        ],
         music: "🎉"
     },
     birthday: {
         template: "Happy Birthday, [Name]!",
-        subtitle: "Wishing you a fantastic day filled with joy!",
+        subtitles: [
+            "Wishing you a fantastic day filled with joy!",
+            "Have a magical birthday celebration!",
+            "May all your dreams come true today!",
+            "Sending you hugs, wishes, and lots of cake!",
+            "Enjoy your special trip around the sun!",
+            "Here’s to another year of being awesome!",
+            "Hope your day is as wonderful as you are!",
+            "Eat cake, pop confetti, and celebrate!",
+            "Cheers to you on your special day!",
+            "Wishing you health, happiness, and fun!"
+        ],
         music: "🎂"
     },
     anniversary: {
         template: "Happy Wedding Anniversary, [Name]!",
-        subtitle: "Celebrating another year of love and happiness.",
+        subtitles: [
+            "Celebrating another year of love and happiness.",
+            "Wishing you a lifetime of togetherness.",
+            "Cheers to your beautiful journey together.",
+            "May your love grow stronger with each passing year.",
+            "Happy Anniversary to a wonderful couple!",
+            "Here's to love, laughter, and happily ever after.",
+            "Celebrating the love that binds you two.",
+            "May your days be filled with endless romance.",
+            "A perfect pair deserves a perfect day.",
+            "To many more years of shared memories."
+        ],
         music: "💍"
     }
 };
@@ -43,17 +76,23 @@ function render() {
     let titleHtml = '';
     let subtitleText = '';
 
+    // Helper to get random subtitle
+    const getRandomSubtitle = (type) => {
+        const subs = STRINGS[type].subtitles;
+        return subs[Math.floor(Math.random() * subs.length)];
+    };
+
     if (type === 'birthday') {
         const titleText = STRINGS.birthday.template.replace('[Name]', `<span class="rainbow-text">${name}</span>`);
         titleHtml = titleText;
-        subtitleText = STRINGS.birthday.subtitle;
+        subtitleText = getRandomSubtitle('birthday');
     } else if (type === 'anniversary') {
         const titleText = STRINGS.anniversary.template.replace('[Name]', `<span class="rainbow-text">${name}</span>`);
         titleHtml = titleText;
-        subtitleText = STRINGS.anniversary.subtitle;
+        subtitleText = getRandomSubtitle('anniversary');
     } else {
         titleHtml = STRINGS.default.title;
-        subtitleText = STRINGS.default.subtitle;
+        subtitleText = getRandomSubtitle('default');
 
         const formHtml = `
             <div class="mt-8 bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-xl w-full max-w-md mx-auto animate-fade-in border border-white/20">
